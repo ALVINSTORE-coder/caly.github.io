@@ -1,252 +1,214 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Caly Suka Kamu</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0f1115;
-      color: #ecf0f1;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-    header {
-  background: linear-gradient(to right, #f7a3d9, #f0b3d9); /* Gradasi pink */
-  color: white;
-  padding: 20px;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-    
-.menu-toggle {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 26px;
-  cursor: pointer;
-  color: #ff4081; /* Menambahkan warna pink */
-}
-    .payment-menu {
-      position: fixed;
-      top: 0;
-      left: -100%;
-      width: 280px;
-      height: 100%;
-      background: linear-gradient(145deg, #1a2639, #0d1018);
-      color: white;
-      padding: 20px;
-      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.6);
-      transition: left 0.4s ease-in-out;
-      z-index: 1000;
-    }
-    .payment-menu.show {
-      left: 0;
-    }
-    .product {
-      background: #1a1d29;
-      margin: 20px;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-    .product h3 {
-      margin: 0;
-      color: #f0b3d9;
-    }
-    .product button {
-      margin-top: 10px;
-      padding: 10px 15px;
-      background: #f0b3d9;
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 8px;
-    }
-    .product button:hover {
-      background: #009ec3;
-    }
-    .admin-info {
-      background: #2c3e50;
-      padding: 15px;
-      margin-top: 30px;
-      border-radius: 10px;
-      text-align: center;
-    }
-    .admin-info h4 {
-      margin: 0 0 10px 0;
-      color: #ecf0f1;
-    }
-    .admin-info p {
-      margin: 0;
-      color: #bdc3c7;
-    }
-    .qris-button, .wa-button {
-      display: block;
-      margin-top: 20px;
-      padding: 12px;
-      background: #00c3ff;
-      color: white;
-      text-align: center;
-      border-radius: 8px;
-      text-decoration: none;
-      box-shadow: 0 0 10px #00c3ff;
-    }
-    .qris-button:hover, .wa-button:hover {
-      background: #007fa6;
-      box-shadow: 0 0 20px #007fa6;
-    }
-    .payment-option {
-  padding: 12px 20px;
-  margin: 10px 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-
-.option-suntik {
-  background: linear-gradient(135deg, #ff4e50, #f9d423);
-  color: black;
-}
-
-.option-jasher {
-  background: linear-gradient(135deg, #24c6dc, #514a9d);
-  color: white;
-}
-
-.option-tampilan {
-  background: linear-gradient(135deg, #00b09b, #96c93d);
-  color: black;
-}
-
-.payment-option:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(255,255,255,0.2);
-}
-.payment-option i {
-  margin-right: 10px; /* Memberikan jarak antara ikon dan teks */
-  font-size: 20px; /* Ukuran ikon */
-  vertical-align: middle; /* Menyelaraskan ikon dengan teks */
-}
-
-.payment-option {
-  padding: 12px 20px;
-  margin: 10px 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.payment-option:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
-}
-  </style>
-</head>
-  <!-- Link Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fix Unexpected Token 'case' Otomatis dengan Log Perbaikan</title>
+<style>
+  body {
+    background-color: #0b1120;
+    color: #b3f4b3;
+    font-family: 'Courier New', monospace;
+    margin: 20px;
+  }
+  h1 {
+    color: #72bcd4;
+  }
+  input[type="file"] {
+    margin-bottom: 20px;
+  }
+  textarea {
+    width: 100%;
+    height: 300px;
+    background-color: #0e1e2f;
+    color: #b3f4b3;
+    border: 2px solid #64b5f6;
+    border-radius: 6px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    padding: 12px;
+    resize: vertical;
+  }
+  button {
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    margin-top: 10px;
+    background-color: #2196f3;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #1976d2;
+  }
+  .info {
+    margin-top: 10px;
+    font-style: italic;
+    color: #a3d0f7;
+  }
+  .log {
+    margin-top: 15px;
+    background-color: #12263a;
+    border-radius: 6px;
+    padding: 12px;
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #c0f0c0;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
-    <h1> Caly⚡ Store </h1>
-  </header>  <div class="payment-menu" id="paymentMenu">
-    <h2>Pembayaran</h2><a
-    <!-- Tombol Produk -->
-<!-- Tombol Produk dengan Ikon -->
-<a href="https://wa.me/6285191931748?text=https://wa.me/6285191931748?text=Hai%20Admin%2C%20Cantik%20mau%20Beli%20Dong🤤" target="_blank">
-  <div class="payment-option option-suntik">
-    <i class="fas fa-syringe"></i> BUY SUNTIK
-  </div>
-</a>
 
-<a href="https://wa.me/6285191931748?text=https://wa.me/6285191931748?text=Hai%20Admin%2C%20Cantik%20mau%20Beli%20Dong🤤" target="_blank">
-  <div class="payment-option option-jasher">
-    <i class="fas fa-cogs"></i> BUY JASHER
-  </div>
-</a>
+<h1>🔧 Fix Unexpected Token 'case' Otomatis + Log Perbaikan</h1>
 
-<a href="https://wa.me/6285191931748?text=https://wa.me/6283106133182?text=Hai%20Admin%2C%20Cantik%20mau%20Beli%20Dong🤤" target="_blank">
-  <div class="payment-option option-tampilan">
-    <i class="fas fa-tv"></i> BUY TAMPILAN KAYA ANDA
-  </div>
-</a>
+<input type="file" id="fileInput" accept=".js,.txt" />
+<button id="fixBtn" disabled>🔄 Fix & Tampilkan Kode</button>
+<button id="downloadBtn" disabled>📥 Download Kode Fix</button>
 
-<!-- Tombol Kontak dan Pembayaran dengan Ikon -->
-<a href="https://wa.me/6285191931748?text=https://wa.me/6285191931748?text=Hai%20Admin%2C%20Cantik%20mau%20Beli%20Dong🤤" target="_blank">
-  <div class="payment-option" style="background: linear-gradient(135deg, #f7971e, #ffd200); color: black;">
-    <i class="fas fa-qrcode"></i> BAYAR VIA QRIS KE ADMIN
-  </div>
-</a>
+<textarea id="codeArea" placeholder="Kode akan muncul di sini setelah upload dan fix..." spellcheck="false"></textarea>
 
-<a href="https://wa.me/6285191931748" target="_blank">
-  <div class="payment-option" style="background: linear-gradient(135deg, #25d366, #128c7e); color: white;">
-    <i class="fab fa-whatsapp"></i> KONTAK ADMIN
-  </div>
-</a>
+<div class="info" id="info"></div>
+<div class="log" id="logFix"></div>
 
-<a href="https://t.me/Calyy7" target="_blank">
-  <div class="payment-option" style="background: linear-gradient(135deg, #0088cc, #005580); color: white;">
-    <i class="fab fa-telegram-plane"></i> TELE ADMIN
-  </div>
-</a>
+<script>
+  let originalCode = '';
+  let fixedCode = '';
+  let fixLogs = [];
 
-<a href="https://whatsapp.com/channel/0029Vb2QnZEF6sn7iSLEbM29" target="_blank">
-  <div class="payment-option" style="background: linear-gradient(135deg, #9d50bb, #6e48aa); color: white;">
-    <i class="fab fa-whatsapp"></i> TESTIMONI ADMIN
-  </div>
-</a>
+  const fileInput = document.getElementById('fileInput');
+  const fixBtn = document.getElementById('fixBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const codeArea = document.getElementById('codeArea');
+  const info = document.getElementById('info');
+  const logFix = document.getElementById('logFix');
 
-  </div>  <div class="product">
-    <h3>Panel 1GB - 10GB</h3>
-    <button onclick="hubungiAdmin('Panel 1-10GB')">Hubungi Admin</button>
-  </div>
-  <div class="product">
-    <h3>Reseller Panel</h3>
-    <button onclick="hubungiAdmin('Reseller Panel')">Hubungi Admin</button>
-  </div>
-  <div class="product">
-    <h3>Admin Panel</h3>
-    <button onclick="hubungiAdmin('Admin Panel')">Hubungi Admin</button>
-  </div>
-  <div class="product">
-    <h3>Owner Panel</h3>
-    <button onclick="hubungiAdmin('Owner Panel')">Hubungi Admin</button>
-  </div>
-  <div class="product">
-    <h3>Partner Panel</h3>
-    <button onclick="hubungiAdmin('Partner Panel')">Hubungi Admin</button>
-  </div>
-  <div class="product">
-    <h3>Tangan Kanan Panel</h3>
-    <button onclick="hubungiAdmin('Tangan Kanan Panel')">Hubungi Admin</button>
-  </div>  <div class="admin-info">
-    <h4>Kontak Admin</h4>
-    <p>0851-9193-1748 Nomor Owner Theme 0831-0613-3182</p>
-  </div>  <script>
-    const menu = document.getElementById("paymentMenu");
+  // Load file
+  fileInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return alert('Tidak ada file yang dipilih.');
 
-    function toggleMenu() {
-      menu.classList.toggle("show");
-    }
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      originalCode = evt.target.result;
+      codeArea.value = originalCode;
+      info.textContent = "File berhasil di-load. Klik 'Fix & Tampilkan Kode' untuk memperbaiki.";
+      fixBtn.disabled = false;
+      downloadBtn.disabled = true;
+      logFix.textContent = '';
+      fixLogs = [];
+    };
+    reader.readAsText(file);
+  });
 
-    function hubungiAdmin(produk) {
-      const pesan = `Halo Admin, saya ingin membeli ${produk}`;
-      window.open(`https://wa.me/6285191931748?text=${encodeURIComponent(pesan)}`, '_blank');
-    }
+  // Fungsi fix dan log perbaikan
+  function fixUnexpectedCase(code) {
+    fixLogs = [];
 
-    window.addEventListener("click", function(event) {
-      if (!event.target.closest(".payment-menu") && !event.target.closest(".menu-toggle")) {
-        menu.classList.remove("show");
+    // Split kode jadi baris supaya gampang deteksi nomor baris
+    const lines = code.split(/\r?\n/);
+
+    // Regex untuk mendeteksi line yang ada 'case ...:'
+    const caseLineRegex = /^\s*case\s+([^:]+):/;
+
+    // Kita buat flag untuk track kalau sedang di dalam case yang belum ada kurung kurawal
+    let insideCaseNoBrace = false;
+    let fixedLines = [...lines];
+
+    // Loop baris, cek case
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i];
+      let match = line.match(caseLineRegex);
+
+      if (match) {
+        let caseLabel = match[1].trim();
+
+        // Cek apakah baris berikutnya ada '{' setelah ':'
+        // Kita cek sisa baris itu apakah ada '{' setelah ':'
+        const colonIndex = line.indexOf(':');
+        const afterColon = line.slice(colonIndex + 1).trim();
+
+        if (!afterColon.startsWith('{')) {
+          // Belum ada kurung kurawal langsung di baris case, kita fix
+
+          // Tambahkan '{' di baris ini setelah ':'
+          fixedLines[i] = line.slice(0, colonIndex + 1) + ' {'; // Tambah spasi + kurung buka
+
+          // Cari di baris selanjutnya posisi akhir case (berhenti saat ketemu 'case' lain atau 'default' atau 'break')
+          // Biasanya, case ditutup sebelum case berikutnya, tapi kita harus cari secara hati-hati
+          // Kita cari baris break atau case/default berikutnya
+
+          let insertClosingBraceIndex = i + 1;
+          for (let j = i + 1; j < lines.length; j++) {
+            if (/^\s*(case|default)\s+/.test(lines[j])) {
+              insertClosingBraceIndex = j - 1;
+              break;
+            }
+            if (/^\s*break\s*;/.test(lines[j])) {
+              insertClosingBraceIndex = j;
+              break;
+            }
+            // Kalau sampai baris terakhir
+            if (j === lines.length - 1) {
+              insertClosingBraceIndex = j;
+            }
+          }
+
+          // Tambahkan '}' di akhir case (paling bawah yang kita dapat)
+          if (insertClosingBraceIndex >= i + 1) {
+            // Cek apakah baris akhir case sudah ada '}' (biar gak double)
+            if (!fixedLines[insertClosingBraceIndex].includes('}')) {
+              fixedLines[insertClosingBraceIndex] += ' }';
+            }
+          } else {
+            // Kalau gak ketemu, tambahkan di baris berikutnya saja
+            fixedLines.splice(i + 1, 0, '}');
+          }
+
+          fixLogs.push(`Baris ${i + 1}: Kurung kurawal {} ditambahkan di case '${caseLabel}'`);
+        }
       }
-    });
-  </script></body>
+    }
+
+    return fixedLines.join('\n');
+  }
+
+  // Tombol Fix & Tampilkan
+  fixBtn.addEventListener('click', () => {
+    if (!originalCode) return alert('Mohon upload file terlebih dahulu.');
+
+    fixedCode = fixUnexpectedCase(originalCode);
+    codeArea.value = fixedCode;
+    info.textContent = "Kode sudah diperbaiki secara otomatis. Kamu bisa edit di textarea dan klik Download untuk menyimpan.";
+
+    if (fixLogs.length > 0) {
+      logFix.innerHTML = "<b>Log Perbaikan:</b><br>" + fixLogs.map(log => '- ' + log).join('<br>');
+    } else {
+      logFix.textContent = "Tidak ada perbaikan yang diperlukan.";
+    }
+
+    downloadBtn.disabled = false;
+  });
+
+  // Tombol Download file hasil fix
+  downloadBtn.addEventListener('click', () => {
+    if (!fixedCode) return alert('Belum ada kode untuk di-download.');
+
+    const blob = new Blob([fixedCode], { type: 'text/javascript' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+
+    a.download = 'kode-fix.js';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+</script>
+
+</body>
 </html>
