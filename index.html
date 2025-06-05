@@ -1,214 +1,186 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Fix Unexpected Token 'case' Otomatis dengan Log Perbaikan</title>
-<style>
-  body {
-    background-color: #0b1120;
-    color: #b3f4b3;
-    font-family: 'Courier New', monospace;
-    margin: 20px;
-  }
-  h1 {
-    color: #72bcd4;
-  }
-  input[type="file"] {
-    margin-bottom: 20px;
-  }
-  textarea {
-    width: 100%;
-    height: 300px;
-    background-color: #0e1e2f;
-    color: #b3f4b3;
-    border: 2px solid #64b5f6;
-    border-radius: 6px;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    padding: 12px;
-    resize: vertical;
-  }
-  button {
-    cursor: pointer;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    padding: 12px 24px;
-    margin-top: 10px;
-    background-color: #2196f3;
-    color: white;
-    transition: background-color 0.3s ease;
-  }
-  button:hover {
-    background-color: #1976d2;
-  }
-  .info {
-    margin-top: 10px;
-    font-style: italic;
-    color: #a3d0f7;
-  }
-  .log {
-    margin-top: 15px;
-    background-color: #12263a;
-    border-radius: 6px;
-    padding: 12px;
-    max-height: 200px;
-    overflow-y: auto;
-    font-size: 13px;
-    line-height: 1.4;
-    color: #c0f0c0;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>JS Auto Fixer - Dual View</title>
+  <style>
+    body {
+      background: #121212;
+      color: #fff;
+      font-family: sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #00ffe1;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #000;
+    }
+
+    input[type="file"], button {
+      margin: 10px 5px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    input[type="file"] {
+      background: #333;
+      color: #fff;
+    }
+
+    button {
+      background: #00ffe1;
+      color: #000;
+    }
+
+    button:hover {
+      background: #00c7b7;
+    }
+
+    .output-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+
+    .code-box {
+      background: #111;
+      flex: 1;
+      border-radius: 8px;
+      padding: 10px;
+      overflow: auto;
+      max-height: 400px;
+      font-family: monospace;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .line {
+      display: flex;
+    }
+
+    .linenum {
+      color: #888;
+      width: 40px;
+      text-align: right;
+      padding-right: 10px;
+      user-select: none;
+    }
+
+    #downloadBtn {
+      display: none;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      color: #00e0ff;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>🔧 JavaScript Auto Fixer (with Line View)</h1>
+    <input type="file" id="fileInput" accept=".js">
+    <button onclick="fixCode()">Fix</button>
+    <button id="downloadBtn" onclick="downloadFixedCode()">Download</button>
 
-<h1>🔧 Fix Unexpected Token 'case' Otomatis + Log Perbaikan</h1>
+    <div class="output-container">
+      <div class="code-box">
+        <h3>📄 Buffer Asli</h3>
+        <div id="originalBuffer"></div>
+      </div>
+      <div class="code-box">
+        <h3>✅ Buffer Fixed</h3>
+        <div id="fixedBuffer"></div>
+      </div>
+    </div>
+  </div>
 
-<input type="file" id="fileInput" accept=".js,.txt" />
-<button id="fixBtn" disabled>🔄 Fix & Tampilkan Kode</button>
-<button id="downloadBtn" disabled>📥 Download Kode Fix</button>
+  <script>
+    let originalCode = "";
+    let fixedCode = "";
 
-<textarea id="codeArea" placeholder="Kode akan muncul di sini setelah upload dan fix..." spellcheck="false"></textarea>
+    document.getElementById('fileInput').addEventListener('change', function (e) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        originalCode = event.target.result;
+        document.getElementById('originalBuffer').innerHTML = renderLines(originalCode.split('\n'));
+        document.getElementById('fixedBuffer').innerHTML = "";
+        document.getElementById('downloadBtn').style.display = "none";
+      };
+      reader.readAsText(e.target.files[0]);
+    });
 
-<div class="info" id="info"></div>
-<div class="log" id="logFix"></div>
+    function fixCode() {
+      if (!originalCode) return alert("⚠️ Harap upload file JavaScript terlebih dahulu.");
 
-<script>
-  let originalCode = '';
-  let fixedCode = '';
-  let fixLogs = [];
+      const lines = originalCode.split('\n');
+      const fixedLines = [];
+      let insideSwitch = false;
+      let switchOpened = false;
 
-  const fileInput = document.getElementById('fileInput');
-  const fixBtn = document.getElementById('fixBtn');
-  const downloadBtn = document.getElementById('downloadBtn');
-  const codeArea = document.getElementById('codeArea');
-  const info = document.getElementById('info');
-  const logFix = document.getElementById('logFix');
+      for (let i = 0; i < lines.length; i++) {
+        const trimmed = lines[i].trim();
 
-  // Load file
-  fileInput.addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (!file) return alert('Tidak ada file yang dipilih.');
+        if (trimmed.startsWith("switch")) {
+          insideSwitch = true;
+          fixedLines.push(lines[i]);
+          continue;
+        }
 
-    const reader = new FileReader();
-    reader.onload = function(evt) {
-      originalCode = evt.target.result;
-      codeArea.value = originalCode;
-      info.textContent = "File berhasil di-load. Klik 'Fix & Tampilkan Kode' untuk memperbaiki.";
-      fixBtn.disabled = false;
-      downloadBtn.disabled = true;
-      logFix.textContent = '';
-      fixLogs = [];
-    };
-    reader.readAsText(file);
-  });
+        if (trimmed === "}") {
+          insideSwitch = false;
+          fixedLines.push(lines[i]);
+          continue;
+        }
 
-  // Fungsi fix dan log perbaikan
-  function fixUnexpectedCase(code) {
-    fixLogs = [];
-
-    // Split kode jadi baris supaya gampang deteksi nomor baris
-    const lines = code.split(/\r?\n/);
-
-    // Regex untuk mendeteksi line yang ada 'case ...:'
-    const caseLineRegex = /^\s*case\s+([^:]+):/;
-
-    // Kita buat flag untuk track kalau sedang di dalam case yang belum ada kurung kurawal
-    let insideCaseNoBrace = false;
-    let fixedLines = [...lines];
-
-    // Loop baris, cek case
-    for (let i = 0; i < lines.length; i++) {
-      let line = lines[i];
-      let match = line.match(caseLineRegex);
-
-      if (match) {
-        let caseLabel = match[1].trim();
-
-        // Cek apakah baris berikutnya ada '{' setelah ':'
-        // Kita cek sisa baris itu apakah ada '{' setelah ':'
-        const colonIndex = line.indexOf(':');
-        const afterColon = line.slice(colonIndex + 1).trim();
-
-        if (!afterColon.startsWith('{')) {
-          // Belum ada kurung kurawal langsung di baris case, kita fix
-
-          // Tambahkan '{' di baris ini setelah ':'
-          fixedLines[i] = line.slice(0, colonIndex + 1) + ' {'; // Tambah spasi + kurung buka
-
-          // Cari di baris selanjutnya posisi akhir case (berhenti saat ketemu 'case' lain atau 'default' atau 'break')
-          // Biasanya, case ditutup sebelum case berikutnya, tapi kita harus cari secara hati-hati
-          // Kita cari baris break atau case/default berikutnya
-
-          let insertClosingBraceIndex = i + 1;
-          for (let j = i + 1; j < lines.length; j++) {
-            if (/^\s*(case|default)\s+/.test(lines[j])) {
-              insertClosingBraceIndex = j - 1;
-              break;
-            }
-            if (/^\s*break\s*;/.test(lines[j])) {
-              insertClosingBraceIndex = j;
-              break;
-            }
-            // Kalau sampai baris terakhir
-            if (j === lines.length - 1) {
-              insertClosingBraceIndex = j;
-            }
+        if ((trimmed.startsWith("case ") || trimmed.startsWith("case'") || trimmed.startsWith("case\"")) && !insideSwitch) {
+          if (!switchOpened) {
+            fixedLines.push("switch(command) {");
+            switchOpened = true;
           }
-
-          // Tambahkan '}' di akhir case (paling bawah yang kita dapat)
-          if (insertClosingBraceIndex >= i + 1) {
-            // Cek apakah baris akhir case sudah ada '}' (biar gak double)
-            if (!fixedLines[insertClosingBraceIndex].includes('}')) {
-              fixedLines[insertClosingBraceIndex] += ' }';
-            }
-          } else {
-            // Kalau gak ketemu, tambahkan di baris berikutnya saja
-            fixedLines.splice(i + 1, 0, '}');
-          }
-
-          fixLogs.push(`Baris ${i + 1}: Kurung kurawal {} ditambahkan di case '${caseLabel}'`);
+          fixedLines.push("  " + trimmed);
+        } else {
+          fixedLines.push(lines[i]);
         }
       }
+
+      if (switchOpened) {
+        fixedLines.push("}");
+      }
+
+      fixedCode = fixedLines.join('\n');
+      document.getElementById('fixedBuffer').innerHTML = renderLines(fixedCode.split('\n'));
+      document.getElementById('downloadBtn').style.display = "inline-block";
     }
 
-    return fixedLines.join('\n');
-  }
-
-  // Tombol Fix & Tampilkan
-  fixBtn.addEventListener('click', () => {
-    if (!originalCode) return alert('Mohon upload file terlebih dahulu.');
-
-    fixedCode = fixUnexpectedCase(originalCode);
-    codeArea.value = fixedCode;
-    info.textContent = "Kode sudah diperbaiki secara otomatis. Kamu bisa edit di textarea dan klik Download untuk menyimpan.";
-
-    if (fixLogs.length > 0) {
-      logFix.innerHTML = "<b>Log Perbaikan:</b><br>" + fixLogs.map(log => '- ' + log).join('<br>');
-    } else {
-      logFix.textContent = "Tidak ada perbaikan yang diperlukan.";
+    function renderLines(lines) {
+      return lines.map((line, i) => {
+        return `<div class="line"><div class="linenum">${i + 1}</div><div>${line.replace(/</g, '&lt;')}</div></div>`;
+      }).join('');
     }
 
-    downloadBtn.disabled = false;
-  });
-
-  // Tombol Download file hasil fix
-  downloadBtn.addEventListener('click', () => {
-    if (!fixedCode) return alert('Belum ada kode untuk di-download.');
-
-    const blob = new Blob([fixedCode], { type: 'text/javascript' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-
-    a.download = 'kode-fix.js';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  });
-</script>
-
+    function downloadFixedCode() {
+      const blob = new Blob([fixedCode], { type: 'text/javascript' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'fixed_script.js';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
 </body>
 </html>
